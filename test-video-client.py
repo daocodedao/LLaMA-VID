@@ -2,7 +2,7 @@
 import requests
 
 
-url = "http://localhost:9890/video/describe/"
+url = "http://192.168.0.65:9890/video/describe/"
 videoPath = "./demos/video1.0.mp4"
 files = {'upload_file': open(videoPath,'rb')}
 
