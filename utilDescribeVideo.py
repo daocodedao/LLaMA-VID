@@ -17,6 +17,9 @@ gConvMode = None
 
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   # see issue #152
 os.environ["CUDA_VISIBLE_DEVICES"]="1"
+api_logger.info(f"Using GPU is CUDA:{os.environ['CUDA_VISIBLE_DEVICES']}")
+
+
 
 def load_video(video_path, fps=1):
     vr = VideoReader(video_path, ctx=cpu(0))
@@ -87,7 +90,7 @@ def describeVideo(videoPath, prompt="describe the video"):
 
     conv.append_message(conv.roles[1], None)
     prompt = conv.get_prompt()
-    print(f"prompt = {prompt}")
+    api_logger.info(f"prompt = {prompt}")
 
     input_ids = tokenizer_image_token(prompt, gVideoTokenizer, IMAGE_TOKEN_INDEX, return_tensors='pt').unsqueeze(0).cuda()
     stop_str = conv.sep if conv.sep_style != SeparatorStyle.TWO else conv.sep2

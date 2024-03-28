@@ -1,6 +1,6 @@
 from utilDescribeVideo import *
 import os
-# 
+
 
 
 initModel()
