@@ -3,9 +3,9 @@ import platform
 
 from utils.logger_settings import api_logger
 from urllib.parse import urlparse
-import av
+# import av
 
-import cv2
+# import cv2
 
 
 def split(todo_text):
