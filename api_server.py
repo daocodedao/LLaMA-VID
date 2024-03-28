@@ -18,23 +18,24 @@ app = FastAPI()
 @app.post("/video/describe")
 def upload_file(file: UploadFile = File(...)):
     api_logger.info(f"/video/describe 收到文件 {file.filename}")
-    saveVideoName = f"{Util.getCurTimeStampStr()}.mp4"
-    videoPath = os.path.join("/tmp/", saveVideoName)
+    saveVideoPath = Util.getTempMp4FilePath()
+    api_logger.info(f"保存文件到 {saveVideoPath}")
 
     try:
         contents = file.file.read()
-        with open(videoPath, 'wb') as f:
+        with open(saveVideoPath, 'wb') as f:
             f.write(contents)
-    except Exception:
+    except Exception as e:
+        api_logger.error(e)
         return {"message": "There was an error uploading the file"}
     finally:
         file.file.close()
 
     desc = "成功"
     # desc = describeVideo(videoPath)
-    api_logger.info(f"视频描述：{file.filename}")
-    api_logger.info(f"准备删除视频文件：{videoPath}")
-    os.remove(videoPath)
+    api_logger.info(f"视频描述：{desc}")
+    api_logger.info(f"准备删除视频文件：{saveVideoPath}")
+    os.remove(saveVideoPath)
     return {"code":200, "message":desc}   
 
 

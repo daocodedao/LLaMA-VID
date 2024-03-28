@@ -224,3 +224,8 @@ class Util:
     timestamp = int(datetime.now().timestamp())
     string_timestamp = str(timestamp)
     return string_timestamp
+  
+  def getTempMp4FilePath():
+      saveVideoName = f"{Util.getCurTimeStampStr()}.mp4"
+      videoPath = os.path.join("/tmp/", saveVideoName)
+      return videoPath
