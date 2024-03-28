@@ -60,7 +60,7 @@ def main(args):
         args.conv_mode = conv_mode
 
     videoPaths=MediaUtil.getVideosFromDir(args.video_dir)
-    api_logger.info(f"videoPaths: {videoPaths}")
+    api_logger.info(f"{args.video_dir} videoPaths: {videoPaths}")
     inp = "describe the video"
     api_logger.info(f"question: {inp}")
 
