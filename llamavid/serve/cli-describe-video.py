@@ -61,7 +61,6 @@ def main(args):
 
     videoPaths=MediaUtil.getVideoPathsFromDir(args.video_dir)
     api_logger.info(f"{args.video_dir} videoPaths: {videoPaths}")
-    api_logger.info(f"question: {inp}")
 
     for idx, videoPath in enumerate(videoPaths) :
         inp = "describe the video"
