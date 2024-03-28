@@ -1,7 +1,30 @@
+python3.10 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt 
 
 
+mkdir -p model_zoo/LAVIS/
+wget https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP2/eva_vit_g.pth  -P model_zoo/LAVIS/
 
-https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP2/eva_vit_g.pth
+cd model_zoo
+git lfs install
+git clone https://huggingface.co/YanweiLi/llama-vid-7b-full-224-video-fps-1
+
+
+CUDA_VISIBLE_DEVICES=0,1 python -m llamavid.serve.cli --model-path model_zoo/llama-vid-7b-full-224-video-fps-1 --image-file demos/video1.0.mp4 --temperature 0.5
+
+
+CUDA_VISIBLE_DEVICES=0 python -m llamavid.serve.cli \
+    --model-path model_zoo/llama-vid-7b-full-224-video-fps-1 \
+    --image-file demos/video1.0.mp4 \
+    --temperature 0.5 \
+    --load-4bit
+
+
+CUDA_VISIBLE_DEVICES=0 python llamavid/serve/run_llamavid_movie.py \
+    --model-path model_zoo/llama-vid-7b-full-224-video-fps-1 \
+    --video-file demos/video1.0.mp4 \
+    --load-4bit
 
 
 # LLaMA-VID: An Image is Worth 2 Tokens in Large Language Models
