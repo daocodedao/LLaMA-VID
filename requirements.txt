@@ -26,7 +26,10 @@ einops-exts==0.0.4
 timm==0.6.13
 gradio_client==0.2.9
 fairscale 
-decord
+# decord
+decord; sys_platform != 'darwin'
+eva-decord;sys_platform == 'darwin' and platform_machine == 'arm64'
+
 flash_attn==1.0.5
 whisper
 srt
