@@ -64,7 +64,11 @@ def main(args):
     inp = "describe the video"
     api_logger.info(f"question: {inp}")
 
-    for videoPath in videoPaths:
+    for idx, videoPath in enumerate(videoPaths) :
+        if idx > 4:
+            api_logger.info(f"已处理了3个, 结束")
+            break
+
         api_logger.info(f"videoPath: {videoPath}")
         conv = conv_templates[args.conv_mode].copy()
         # print(f"conv={conv}")
