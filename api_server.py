@@ -48,3 +48,16 @@ async def upload_file(file: UploadFile = File(...)):
 @app.get("/live/")
 def live():
     return {"code":200, "message":"living"}   
+
+
+@app.post("/upload")
+def upload(file: UploadFile = File(...)):
+    try:
+        with open(file.filename, 'wb') as f:
+            shutil.copyfileobj(file.file, f)
+    except Exception:
+        return {"message": "There was an error uploading the file"}
+    finally:
+        file.file.close()
+        
+    return {"message": f"Successfully uploaded {file.filename}"}
