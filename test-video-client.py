@@ -12,7 +12,8 @@ files = {'upload_file': open(videoPath,'rb')}
 
 response = requests.post(url, files=files)
 retJson = response.json()
-ret_text = retJson["message"]
-print(retJson)
+# ret_text = retJson["message"]
+
 print("返回结果")
-print(ret_text)
+print(retJson)
+# print(ret_text)
