@@ -221,7 +221,7 @@ class Util:
        return "127.0.0.1:10809"
     
   def getCurTimeStampStr():
-    timestamp = int(datetime.datetime.now())
+    timestamp = int(datetime.datetime.now().timestamp())
     string_timestamp = str(timestamp)
     return string_timestamp
   
