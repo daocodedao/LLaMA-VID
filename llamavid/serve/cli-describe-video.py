@@ -129,6 +129,8 @@ def main(args):
 
         input_ids = tokenizer_image_token(prompt, tokenizer, IMAGE_TOKEN_INDEX, return_tensors='pt').unsqueeze(0).cuda()
         stop_str = conv.sep if conv.sep_style != SeparatorStyle.TWO else conv.sep2
+        api_logger.info(f"conv: {conv}")
+        
         keywords = [stop_str]
         stopping_criteria = KeywordsStoppingCriteria(keywords, tokenizer, input_ids)
         streamer = TextStreamer(tokenizer, skip_prompt=True, skip_special_tokens=True)
@@ -149,8 +151,8 @@ def main(args):
         conv.messages[-1][-1] = outputs
         conv.messages[-2][-1] = conv.messages[-2][-1].replace(DEFAULT_IMAGE_TOKEN+'\n','')
 
-        if args.debug:
-            print("\n", {"prompt": prompt, "outputs": outputs}, "\n")
+        # if args.debug:
+        api_logger.info("\n", {"prompt": prompt, "outputs": outputs}, "\n")
 
 
 if __name__ == "__main__":
