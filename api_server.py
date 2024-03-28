@@ -6,7 +6,9 @@ from utilDescribeVideo import initModel, describeVideo
 from utils.util import Util
 import os
 
+api_logger.info("加载模型")
 initModel()
+api_logger.info("加载模型-完毕")
 
 app = FastAPI()
 @app.post("/video/describe/")
