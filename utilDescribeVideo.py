@@ -33,16 +33,19 @@ def initModel():
     conv_mode = None
 
     disable_torch_init()
+
     device="cuda:0"
     if torch.cuda.device_count() > 1:
         device = "cuda:1"
+
     gVideoTokenizer, gVideoModel, gVideoProcessor, context_len = load_pretrained_model(model_path, 
                                                                                        model_base, 
                                                                                        model_name, 
                                                                                        load_8bit=load_8bit, 
                                                                                        load_4bit=load_4bit,
-                                                                                       device_map=None,
-                                                                                       device=device)
+                                                                                    #    device_map=None,
+                                                                                    #    device=device
+                                                                                       )
 
     if 'llama-2' in model_name.lower():
         conv_mode = "llava_llama_2"
