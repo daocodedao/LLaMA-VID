@@ -9,7 +9,9 @@ url = "http://192.168.0.65:9890/video/describe/"
 videoPath = "./demos/video1.0.mp4"
 files = {'upload_file': open(videoPath,'rb')}
 
-r = requests.post(url, files=files)
-
+response = requests.post(url, files=files)
+retJson = response.json()
+ret_text = retJson["message"]
+print(retJson)
 print("返回结果")
-print(r)
+print(ret_text)
