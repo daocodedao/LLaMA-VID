@@ -1,36 +1,26 @@
 
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile, File
 from utils.logger_settings import api_logger
-from typing import Dict, Generator, List, Optional, Union
 
+from utilDescribeVideo import initModel, describeVideo
+from utils.util import Util
+import os
 
-
+initModel()
 
 app = FastAPI()
-@app.post("/translate/en-cn/")
-# 添加图书
-def translate_en_cn(item:TranslateItem):
-    global model, tokenizer
-    # api_logger.info(f"准备开始翻译, 收到的参数：{item}")
-    retStr = ""
-    try:
-        # api_logger.info(f"准备翻译:{item}")
-        tokenizer.src_lang = item.srcLang
-        # 有bug， Force 开头的不翻译
-        waitTrans = item.description.replace("Force ", "force ")
-        encoded_zh = tokenizer(waitTrans, return_tensors="pt").to('cuda')
-        generated_tokens = model.generate(**encoded_zh, forced_bos_token_id=tokenizer.lang_code_to_id[item.dstLang])
-        results = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)
-        print(results)
-        if len(results) > 0:
-            retStr = results[0]
-    except IOError as e:
-        api_logger.error(f"An error occurred while processing the file: {e}")
-        return{"code":400, "message":f"翻译添加异常：{e}"}
-    # finally:
-        # api_logger.info("翻译完成！")
+@app.post("/describe-video/")
+async def upload_file(file: UploadFile = File(...)):
+    if not file.endswith(".mp4"):
+        return {"code":201, "message":"Need upload video file"} 
+    
+    saveVideoName = f"{Util.getCurTimeStampStr()}.mp4"
+    videoPath = os.path.join("/tmp/", saveVideoName)
+    with open(videoPath, "wb") as f:
+        f.write(file.file.read())
 
-    return {"code":200, "message":retStr}   
+    desc = describeVideo(videoPath)
+    return {"code":200, "message":desc}   
 
 
 

@@ -121,6 +121,6 @@ def describeVideo(videoPath, prompt="describe the video"):
 
     # if args.debug:
     # print("\n", {"prompt": prompt, "outputs": outputs}, "\n")
-    outputs.replace("</s>",'')
+    outputs = outputs.replace("</s>",'')
     api_logger.info(f"outputs:{outputs}")
     return outputs

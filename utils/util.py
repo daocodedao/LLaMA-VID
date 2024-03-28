@@ -219,3 +219,8 @@ class Util:
         return "192.168.0.77:18808"
     else:
        return "127.0.0.1:10809"
+    
+  def getCurTimeStampStr():
+    timestamp = int(datetime.now().timestamp())
+    string_timestamp = str(timestamp)
+    return string_timestamp
