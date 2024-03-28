@@ -9,7 +9,7 @@ import os
 initModel()
 
 app = FastAPI()
-@app.post("/describe-video/")
+@app.post("/video/describe/")
 async def upload_file(file: UploadFile = File(...)):
     if not file.endswith(".mp4"):
         return {"code":201, "message":"Need upload video file"} 

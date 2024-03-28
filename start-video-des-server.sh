@@ -5,7 +5,7 @@ workdir=/data/work/LLaMA-VID/
 echo "workdir=$workdir"
 cd $workdir
 
-. sh/colors.sh
+. colors.sh
 
 venvBinDir=venv/bin/
 pythonPath=${workdir}${venvBinDir}python
