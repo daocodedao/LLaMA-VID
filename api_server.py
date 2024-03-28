@@ -13,13 +13,14 @@ app = FastAPI()
 async def upload_file(file: UploadFile = File(...)):
     if not file.endswith(".mp4"):
         return {"code":201, "message":"Need upload video file"} 
-    
+    api_logger.info(f"收到文件：{file.filename}")
     saveVideoName = f"{Util.getCurTimeStampStr()}.mp4"
     videoPath = os.path.join("/tmp/", saveVideoName)
     with open(videoPath, "wb") as f:
         f.write(file.file.read())
 
     desc = describeVideo(videoPath)
+    api_logger.info(f"视频描述：{file.filename}")
     return {"code":200, "message":desc}   
 
 
