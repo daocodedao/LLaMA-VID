@@ -16,12 +16,12 @@ api_logger.info("加载模型-完毕")
 
 app = FastAPI()
 @app.post("/video/describe")
-async def upload_file(file: UploadFile = File(...)):
+def upload_file(file: UploadFile = File(...)):
+    api_logger.info(f"/video/describe 收到文件 {file.filename}")
     saveVideoName = f"{Util.getCurTimeStampStr()}.mp4"
     videoPath = os.path.join("/tmp/", saveVideoName)
 
     try:
-        api_logger.info(f"收到文件：{file.filename}")
         contents = file.file.read()
         with open(videoPath, 'wb') as f:
             f.write(contents)
@@ -30,13 +30,6 @@ async def upload_file(file: UploadFile = File(...)):
     finally:
         file.file.close()
 
-
-    # if not file.endswith(".mp4"):
-    #     return {"code":201, "message":"Need upload video file"} 
-    # api_logger.info(f"收到文件：{file.filename}")
-
-    # with open(videoPath, "wb") as f:
-    #     f.write(file.file.read())
     desc = "成功"
     # desc = describeVideo(videoPath)
     api_logger.info(f"视频描述：{file.filename}")
