@@ -1,4 +1,4 @@
-import argparse
+import argparse,os
 import torch
 
 from llamavid.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN
@@ -14,7 +14,10 @@ import requests
 from PIL import Image
 from io import BytesIO
 from transformers import TextStreamer
+from utils.util import Util
 
+os.environ['HTTP_PROXY'] = Util.getProxy()
+os.environ['HTTPS_PROXY'] = Util.getProxy()
 
 def load_image(image_file):
     if image_file.startswith('http') or image_file.startswith('https'):
