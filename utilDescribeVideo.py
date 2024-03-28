@@ -1,5 +1,5 @@
 
-
+import os
 from utils.logger_settings import api_logger
 
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   # see issue #152
@@ -16,7 +16,6 @@ from llamavid.conversation import conv_templates, SeparatorStyle
 from llamavid.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN
 from transformers import TextStreamer
 import torch
-import os
 
 gVideoTokenizer = None
 gVideoModel = None
