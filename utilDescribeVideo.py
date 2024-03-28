@@ -8,11 +8,15 @@ from llamavid.conversation import conv_templates, SeparatorStyle
 from llamavid.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN
 from transformers import TextStreamer
 import torch
+import os
 
 gVideoTokenizer = None
 gVideoModel = None
 gVideoProcessor = None
 gConvMode = None
+
+os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   # see issue #152
+os.environ["CUDA_VISIBLE_DEVICES"]="1"
 
 def load_video(video_path, fps=1):
     vr = VideoReader(video_path, ctx=cpu(0))
@@ -34,9 +38,9 @@ def initModel():
 
     disable_torch_init()
 
-    device="cuda:0"
-    if torch.cuda.device_count() > 1:
-        device = "cuda:1"
+    # device="cuda:0"
+    # if torch.cuda.device_count() > 1:
+    #     device = "cuda:1"
 
     gVideoTokenizer, gVideoModel, gVideoProcessor, context_len = load_pretrained_model(model_path, 
                                                                                        model_base, 
