@@ -30,3 +30,6 @@ decord
 flash_attn==1.0.5
 whisper
 srt
+av
+opencv_python
+moviepy
