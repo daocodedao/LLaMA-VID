@@ -7,8 +7,12 @@ import argparse
 import numpy as np
 from decord import VideoReader, cpu
 from transformers import CLIPVisionModel, CLIPImageProcessor
-from llamavid.model.multimodal_encoder.eva_vit import EVAVisionTowerLavis
 import whisper
+
+import sys,os
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
+from llamavid.model.multimodal_encoder.eva_vit import EVAVisionTowerLavis
+
 
 
 def parse_args():

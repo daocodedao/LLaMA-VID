@@ -50,7 +50,7 @@ def run_inference(args):
     model_name = get_model_name_from_path(args.model_path)
     tokenizer, model, image_processor, context_len = load_pretrained_model(args.model_path, args.model_base, model_name, args.load_8bit, args.load_4bit)
     
-    print(f"pickle.load{args.video_file}")
+    print(f"pickle.load：{args.video_file}")
     video_info = pickle.load(open(args.video_file, 'rb'))
     input_prompt = video_info['inputs']
     if args.pure_text:
