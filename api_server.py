@@ -11,7 +11,7 @@ import shutil
 
 
 api_logger.info("加载模型")
-# initModel()
+initModel()
 api_logger.info("加载模型-完毕")
 
 app = FastAPI()
@@ -32,7 +32,7 @@ def upload_file(file: UploadFile = File(...)):
         file.file.close()
 
     desc = "成功"
-    # desc = describeVideo(videoPath)
+    desc = describeVideo(saveVideoPath)
     api_logger.info(f"视频描述：{desc}")
     api_logger.info(f"准备删除视频文件：{saveVideoPath}")
     os.remove(saveVideoPath)
