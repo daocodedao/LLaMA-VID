@@ -61,10 +61,11 @@ def main(args):
 
     videoPaths=MediaUtil.getVideoPathsFromDir(args.video_dir)
     api_logger.info(f"{args.video_dir} videoPaths: {videoPaths}")
-    inp = "describe the video"
     api_logger.info(f"question: {inp}")
 
     for idx, videoPath in enumerate(videoPaths) :
+        inp = "describe the video"
+
         if idx > 4:
             api_logger.info(f"已处理了3个, 结束")
             break
@@ -152,7 +153,7 @@ def main(args):
         conv.messages[-2][-1] = conv.messages[-2][-1].replace(DEFAULT_IMAGE_TOKEN+'\n','')
 
         # if args.debug:
-        api_logger.info("\n", {"prompt": prompt, "outputs": outputs}, "\n")
+        print("\n", {"prompt": prompt, "outputs": outputs}, "\n")
 
 
 if __name__ == "__main__":
