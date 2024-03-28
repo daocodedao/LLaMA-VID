@@ -52,6 +52,7 @@ def live():
 
 @app.post("/upload")
 def upload(file: UploadFile = File(...)):
+    api_logger.info(f"/upload 收到文件 {file.filename}")
     try:
         with open(file.filename, 'wb') as f:
             shutil.copyfileobj(file.file, f)
