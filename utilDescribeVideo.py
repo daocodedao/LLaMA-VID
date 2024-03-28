@@ -35,6 +35,11 @@ def initModel():
     # Model
     global gVideoTokenizer,gVideoModel,gVideoProcessor,gConvMode
 
+    if gVideoModel:
+        api_logger.info("model has loaded")
+        return
+
+
     model_path="model_zoo/llama-vid-7b-full-224-video-fps-1"
     model_base=None
     model_name = get_model_name_from_path(model_path)
