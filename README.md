@@ -10,6 +10,10 @@ cd model_zoo
 git lfs install
 git clone https://huggingface.co/YanweiLi/llama-vid-7b-full-224-video-fps-1
 
+mkdir openai
+cd clip-vit-large-patch14
+git clone https://huggingface.co/openai/clip-vit-large-patch14
+
 
 ## 会出问题 Expected all tensors to be on the same device, 
 CUDA_VISIBLE_DEVICES=0,1 python -m llamavid.serve.cli --model-path model_zoo/llama-vid-7b-full-224-video-fps-1 --image-file demos/video1.0.mp4 --temperature 0.5
