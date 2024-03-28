@@ -10,9 +10,9 @@ import shutil
 
 
 
-# api_logger.info("加载模型")
+api_logger.info("加载模型")
 # initModel()
-# api_logger.info("加载模型-完毕")
+api_logger.info("加载模型-完毕")
 
 app = FastAPI()
 @app.post("/video/describe/")
