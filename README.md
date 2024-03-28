@@ -24,6 +24,12 @@ CUDA_VISIBLE_DEVICES=0 python -m llamavid.serve.cli \
     --image-file demos/video1.0.mp4 \
     --temperature 0.5 \
     --load-4bit 
+
+CUDA_VISIBLE_DEVICES=0 python -m llamavid.serve.cli-describe-video \
+    --model-path model_zoo/llama-vid-7b-full-224-video-fps-1 \
+    --image-file demos/video1.0.mp4 \
+    --temperature 0.5 \
+    --load-4bit     
     
 ## 直接推理
 CUDA_VISIBLE_DEVICES=0  python scripts/extra_tool/extract_video_features_subtitles.py \
