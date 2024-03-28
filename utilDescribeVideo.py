@@ -1,9 +1,17 @@
 
+
+from utils.logger_settings import api_logger
+
+os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   # see issue #152
+os.environ["CUDA_VISIBLE_DEVICES"]="1"
+api_logger.info(f"Using GPU is CUDA:{os.environ['CUDA_VISIBLE_DEVICES']}")
+
+
+
 from decord import VideoReader, cpu
 from llava.utils import disable_torch_init
 from llamavid.model.builder import load_pretrained_model
 from llava.mm_utils import tokenizer_image_token, get_model_name_from_path, KeywordsStoppingCriteria
-from utils.logger_settings import api_logger
 from llamavid.conversation import conv_templates, SeparatorStyle
 from llamavid.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN
 from transformers import TextStreamer
@@ -14,10 +22,6 @@ gVideoTokenizer = None
 gVideoModel = None
 gVideoProcessor = None
 gConvMode = None
-
-os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   # see issue #152
-os.environ["CUDA_VISIBLE_DEVICES"]="1"
-api_logger.info(f"Using GPU is CUDA:{os.environ['CUDA_VISIBLE_DEVICES']}")
 
 
 
