@@ -5,6 +5,7 @@ from utils.logger_settings import api_logger
 from utilDescribeVideo import initModel, describeVideo
 from utils.util import Util
 import os
+import shutil
 
 api_logger.info("加载模型")
 initModel()
@@ -23,6 +24,8 @@ async def upload_file(file: UploadFile = File(...)):
 
     desc = describeVideo(videoPath)
     api_logger.info(f"视频描述：{file.filename}")
+    api_logger.info(f"准备删除视频文件：{videoPath}")
+    os.remove(videoPath)
     return {"code":200, "message":desc}   
 
 
