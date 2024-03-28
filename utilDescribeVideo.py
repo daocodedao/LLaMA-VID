@@ -17,12 +17,11 @@ from llamavid.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_I
 from transformers import TextStreamer
 import torch
 
+
 gVideoTokenizer = None
 gVideoModel = None
 gVideoProcessor = None
 gConvMode = None
-
-
 
 def load_video(video_path, fps=1):
     vr = VideoReader(video_path, ctx=cpu(0))
