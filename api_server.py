@@ -15,7 +15,7 @@ api_logger.info("加载模型")
 api_logger.info("加载模型-完毕")
 
 app = FastAPI()
-@app.post("/video/describe/")
+@app.post("/video/describe")
 async def upload_file(file: UploadFile = File(...)):
     saveVideoName = f"{Util.getCurTimeStampStr()}.mp4"
     videoPath = os.path.join("/tmp/", saveVideoName)
