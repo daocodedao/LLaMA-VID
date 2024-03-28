@@ -1,3 +1,9 @@
+
+
+
+https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP2/eva_vit_g.pth
+
+
 # LLaMA-VID: An Image is Worth 2 Tokens in Large Language Models
 
 <a href='https://llama-vid.github.io/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>

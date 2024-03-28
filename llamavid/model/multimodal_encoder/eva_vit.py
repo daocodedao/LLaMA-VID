@@ -461,7 +461,7 @@ class EVAVisionTowerLavis(nn.Module):
             norm_layer=partial(nn.LayerNorm, eps=1e-6),
             use_checkpoint=self.use_checkpoint,
         )  
-        
+        print(f"self.vision_tower_name={self.vision_tower_name}")
         state_dict = torch.load(self.vision_tower_name, map_location="cpu")    
         interpolate_pos_embed(self.vision_tower, state_dict)
         incompatible_keys = self.vision_tower.load_state_dict(state_dict, strict=False)
