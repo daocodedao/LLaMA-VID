@@ -27,7 +27,7 @@ CUDA_VISIBLE_DEVICES=0 python -m llamavid.serve.cli \
 
 CUDA_VISIBLE_DEVICES=0 python -m llamavid.serve.cli-describe-video \
     --model-path model_zoo/llama-vid-7b-full-224-video-fps-1 \
-    --image-file demos/video1.0.mp4 \
+    --video-dir demos/samples \
     --temperature 0.5 \
     --load-4bit     
     

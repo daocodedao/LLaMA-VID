@@ -12,6 +12,10 @@ import srt
 # 常用工具
 class MediaUtil:
 
+    def getVideosFromDir(fromDir):
+        videoList = [f for f in os.listdir(fromDir) if f.endswith(".mp4")]
+        return videoList
+
     def getRandomMp3FilePath(fromDir):
         mp3_files = [f for f in os.listdir(fromDir) if f.endswith(".mp3")]
         if not mp3_files:
