@@ -1,6 +1,14 @@
 
 import requests
 
+videoPath = "./demos/video1.0.mp4"
+
+url = 'http://localhost:9890/upload'
+file = {'file': open(videoPath, 'rb')}
+resp = requests.post(url=url, files=file) 
+print(resp.json())
+
+exit()
 
 # curl -X POST http://192.168.0.65:9890/video/describe/ -F "file=demos/video1.0.mp4"
 
