@@ -36,3 +36,4 @@ srt
 av
 opencv_python
 moviepy
+python-multipart
