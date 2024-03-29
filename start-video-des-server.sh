@@ -24,5 +24,5 @@ echo "${YELLOW}check $jobName pid $TAILPID ${NOCOLOR}"
 
 
 
-echo "${YELLOW}${pythonPath} -m uvicorn api_server:app --port 9890 --reload${NOCOLOR}"
-nohup ${pythonPath} -m uvicorn api_server:app --port 9890 --reload > /dev/null 2>&1 &
+echo "${YELLOW}${pythonPath} -m uvicorn api_server:app --port 9690 --reload${NOCOLOR}"
+nohup ${pythonPath} -m uvicorn api_server:app --port 9690 --reload > /dev/null 2>&1 &
