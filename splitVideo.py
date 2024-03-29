@@ -1,7 +1,7 @@
 import cv2
 import os
 from pathlib import Path
-from torchvision import transforms
+
 import cv2
 from datetime import datetime
 from splitting.splitHelp import *
@@ -18,15 +18,6 @@ model = imagebind_model.imagebind_huge(pretrained=True)
 model.eval()
 model.to(device)
 
-image_transform = transforms.Compose(
-    [
-        transforms.ToTensor(),
-        transforms.Normalize(
-            mean=(0.48145466, 0.4578275, 0.40821073),
-            std=(0.26862954, 0.26130258, 0.27577711),
-        ),
-    ]
-)
 
 video_events = {}
 # for video_path in tqdm(video_paths):
@@ -35,7 +26,7 @@ fps = cap.get(cv2.CAP_PROP_FPS)
 # cutscene = video_cutscenes[video_path.split("/")[-1]]
 cutscene = cutscenes_raw
 
-cutscene_raw_feature, cutscene_raw_status = extract_cutscene_feature(video_path, cutscene)
+cutscene_raw_feature, cutscene_raw_status = extract_cutscene_feature(video_path, cutscene, model, device)
 
 cutscenes, cutscene_feature = verify_cutscene(cutscene, cutscene_raw_feature, cutscene_raw_status, transition_threshold=1.)
 events_raw, event_feature_raw = cutscene_stitching(cutscenes, cutscene_feature, eventcut_threshold=0.6)

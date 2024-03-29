@@ -34,6 +34,8 @@ ModalityType = SimpleNamespace(
 )
 
 
+imagebind_huge_path = "checkpoints/imagebind_huge.pth"
+
 class ImageBindModel(nn.Module):
     def __init__(
         self,

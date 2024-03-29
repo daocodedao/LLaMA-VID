@@ -7,7 +7,7 @@ import cv2
 from multiprocessing import Pool
 from datetime import datetime, timedelta
 import numpy as np
-
+from torchvision import transforms
 # sys.path.append('ImageBind')
 from splitting.ImageBind.models import imagebind_model
 from splitting.ImageBind.models.imagebind_model import ModalityType
@@ -65,7 +65,17 @@ def transfer_timecode(frameidx, fps):
     return timecode
 
 
-def extract_cutscene_feature(video_path, cutscenes):
+def extract_cutscene_feature(video_path, cutscenes, model, device):
+    image_transform = transforms.Compose(
+    [
+        transforms.ToTensor(),
+        transforms.Normalize(
+            mean=(0.48145466, 0.4578275, 0.40821073),
+            std=(0.26862954, 0.26130258, 0.27577711),
+        ),
+    ]
+    )
+
     features = torch.empty((0,1024))
     res = []
     num_parallel_cutscene = 128
