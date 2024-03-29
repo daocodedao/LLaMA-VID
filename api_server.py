@@ -31,7 +31,7 @@ def upload_file(file: UploadFile = File(...)):
     finally:
         file.file.close()
 
-    desc = "成功"
+    desc = ""
     desc = describeVideo(saveVideoPath)
     api_logger.info(f"视频描述：{desc}")
     api_logger.info(f"准备删除视频文件：{saveVideoPath}")
