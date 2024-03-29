@@ -1,5 +1,4 @@
  --extra-index-url https://download.pytorch.org/whl/cu118
-llava@git+https://github.com/haotian-liu/LLaVA.git@1619889c712e347be1cb4f78ec66e7cf414ac1a6
 einops 
 fastapi 
 gradio==3.35.2 
@@ -31,24 +30,26 @@ fairscale
 decord; sys_platform != 'darwin'
 eva-decord;sys_platform == 'darwin' and platform_machine == 'arm64'
 
-flash_attn==1.0.5
+# flash_attn==1.0.5; sys_platform != 'darwin'
 whisper
 srt
 av
 opencv_python
 moviepy
 
-
-
 torchaudio
-pytorchvideo @ git+https://github.com/facebookresearch/pytorchvideo.git@28fe037d212663c6a24f373b94cc5d478c8c1a1d
 ftfy
 regex
 fvcore
 iopath
 matplotlib
 types-regex
-mayavi @ https://github.com/enthought/mayavi/zipball/master
 pytz
 scenedetect
 tqdm
+
+
+llava @ git+https://github.com/haotian-liu/LLaVA.git@1619889c712e347be1cb4f78ec66e7cf414ac1a6
+mayavi @ https://github.com/enthought/mayavi/zipball/master
+pytorchvideo @ git+https://github.com/facebookresearch/pytorchvideo.git@28fe037d212663c6a24f373b94cc5d478c8c1a1d
+
