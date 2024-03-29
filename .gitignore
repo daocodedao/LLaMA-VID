@@ -37,3 +37,4 @@ ckpts*
 serve_images/
 venv/
 Tos.py
+.checkpoints/

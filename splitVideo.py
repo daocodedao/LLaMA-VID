@@ -1,11 +1,9 @@
-
-
 import cv2
-import os, re, json, argparse, sys
+import os
 from pathlib import Path
 from torchvision import transforms
 import cv2
-from datetime import datetime, timedelta
+from datetime import datetime
 from splitting.splitHelp import *
 
 video_path="./splitting/input_videos/video1.mp4"
