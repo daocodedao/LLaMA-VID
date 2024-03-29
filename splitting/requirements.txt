@@ -13,7 +13,7 @@ iopath
 numpy
 matplotlib
 types-regex
-mayavi
+# mayavi
 pytz
 scenedetect
 tqdm

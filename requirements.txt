@@ -10,6 +10,7 @@ sentencepiece
 tokenizers>=0.12.1
 torch==2.0.1 
 torchvision==0.15.2 
+
 uvicorn 
 wandb
 shortuuid 
@@ -36,4 +37,19 @@ srt
 av
 opencv_python
 moviepy
-python-multipart
+
+
+
+torchaudio
+pytorchvideo @ git+https://github.com/facebookresearch/pytorchvideo.git@28fe037d212663c6a24f373b94cc5d478c8c1a1d
+ftfy
+regex
+fvcore
+iopath
+matplotlib
+types-regex
+mayavi @ https://github.com/enthought/mayavi/zipball/master
+pytz
+scenedetect
+tqdm
+opencv-python
