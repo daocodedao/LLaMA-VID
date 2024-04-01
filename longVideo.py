@@ -44,7 +44,7 @@ class LongVideo(BaseModel):
         os.makedirs(self.subVideoDir, exist_ok=True)
         outVideoPath = os.path.join(videoDir, videoName)
         if not os.path.exists(outVideoPath):
-            shutil.copyfile(self.videoPath, outVideoPath)
+            shutil.copyfile(videoPath, outVideoPath)
             self.videoPath = outVideoPath
 
     def completeVideoInfo(self, videoPath):
