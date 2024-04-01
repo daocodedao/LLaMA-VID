@@ -63,6 +63,7 @@ shutil.rmtree(longVideo.subVideoDir, ignore_errors=True)
 os.makedirs(longVideo.subVideoDir)
 longVideo.shortVideos = []
 
+api_logger.info("[开始]视频分解")
 for i, timecode in enumerate(timecodes): 
     subVideo = ShortVideo()
     start_time = datetime.strptime(timecode[0], '%H:%M:%S.%f')
@@ -87,13 +88,15 @@ for i, timecode in enumerate(timecodes):
 
     longVideo.shortVideos.append(subVideo)
 
-api_logger.info("视频分解完毕")
+api_logger.info("[结束]视频分解")
+
 api_logger.info(longVideo)
 
-
-api_logger.info("开始视频理解")
+api_logger.info("[开始]视频理解")
 for subVideo in longVideo.shortVideos:
     subVideoPath = subVideo.path
     api_logger.info(f"请求视频理解：{outVideoPath}")
     desc = reqVideoDesc(outVideoPath)
     subVideo.desc = desc
+
+api_logger.info("[结束]视频理解")
