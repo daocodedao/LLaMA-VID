@@ -6,12 +6,19 @@ import cv2
 from datetime import datetime
 from splitting.splitHelp import *
 from utils.logger_settings import api_logger
+from utils.util import Util
+from longVideo import LongVideo, ShortVideo
+import shutil
+
 
 srcVideoPath="./splitting/input_videos/video1.mp4"
 video_name = Path(srcVideoPath).stem
-output_folder = f"output/{video_name}"
+videoId = Util.getCurTimeStampStr()
+# output_folder = f"/data/movie/{videoId}"
 cutscenes_raw = cutscene_detection(srcVideoPath, cutscene_threshold=25, max_cutscene_len=5)
         
+longVideo = LongVideo(videoId=videoId, videoPath=srcVideoPath)
+
 
 device = "cuda"
 api_logger.info("loading model")
@@ -37,16 +44,28 @@ events, event_feature = verify_event(events_raw, event_feature_raw, fps, min_eve
 
 video_event = transfer_timecode(events, fps)
 timecodes = video_event
+
+shutil.rmtree(longVideo.subVideoDir, ignore_errors=True)
+os.makedirs(longVideo.subVideoDir)
+
 for i, timecode in enumerate(timecodes): 
+    subVideo = ShortVideo()
     start_time = datetime.strptime(timecode[0], '%H:%M:%S.%f')
     end_time = datetime.strptime(timecode[1], '%H:%M:%S.%f')
     video_duration = (end_time - start_time).total_seconds()
-    outVideoPath = os.path.join(output_folder, video_name+".%i.mp4"%i)
-    api_logger.info(f"inputPath: {srcVideoPath}")
-    api_logger.info(f"outputPath: {outVideoPath}")
-    api_logger.info(f"timecode: {timecode[0]}")
-    api_logger.info(f"video_duration: {video_duration}")
+    subVideo.name = f"{video_name}.{i}.mp4"
+    outVideoPath = os.path.join(longVideo.subVideoDir, subVideo)
+    subVideo.path =outVideoPath
+    subVideo.duration = video_duration
+    subVideo.startTime = start_time
+    subVideo.endTime = end_time
+    
     os.makedirs(os.path.dirname(outVideoPath), exist_ok=True)
     cmd = "ffmpeg -y -hide_banner -loglevel panic -ss %s -t %.3f -i %s %s"%(timecode[0], video_duration, srcVideoPath, outVideoPath)
     api_logger.info(f"cmd: {cmd}")
     os.system(cmd)
+
+    api_logger.info(subVideo)
+
+
+api_logger.info(longVideo)
