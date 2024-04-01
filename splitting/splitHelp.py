@@ -55,7 +55,6 @@ def read_videoframe(video_path, frame_idx):
         frame = np.zeros((224,224,3), dtype=np.uint8)
     return frame, res
 
-
 def transfer_timecode(frameidx, fps):
     timecode = []
     for (start_idx, end_idx) in frameidx:
@@ -63,7 +62,6 @@ def transfer_timecode(frameidx, fps):
         e = str(timedelta(seconds=end_idx/fps, microseconds=1))[:-3]
         timecode.append([s, e])
     return timecode
-
 
 def extract_cutscene_feature(video_path, cutscenes, model, device):
     image_transform = transforms.Compose(
@@ -102,7 +100,6 @@ def extract_cutscene_feature(video_path, cutscenes, model, device):
 
     return features, res
 
-
 def verify_cutscene(cutscenes, cutscene_feature, cutscene_status, transition_threshold=0.8):
     cutscenes_new = []
     cutscene_feature_new = []
@@ -121,7 +118,6 @@ def verify_cutscene(cutscenes, cutscene_feature, cutscene_status, transition_thr
         cutscenes_new.append(cutscene)
         cutscene_feature_new.append([start_frame_fet, end_frame_fet])
     return cutscenes_new, cutscene_feature_new
-
 
 def cutscene_stitching(cutscenes, cutscene_feature, eventcut_threshold=0.6):
     assert len(cutscenes) == len(cutscene_feature)
@@ -151,7 +147,6 @@ def cutscene_stitching(cutscenes, cutscene_feature, eventcut_threshold=0.6):
         event_feature.pop(-1)
 
     return events, event_feature
-
 
 def verify_event(events, event_feature, fps, min_event_len=1.5, max_event_len=60, redundant_event_threshold=0.4, trim_begin_last_percent=0.1, still_event_threshold=0.1): # add remove no change event
     assert len(events) == len(event_feature)

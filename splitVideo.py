@@ -1,17 +1,15 @@
 import cv2
 import os
 from pathlib import Path
-
-import cv2
 from datetime import datetime, time
-from splitting.splitHelp import *
-from utils.logger_settings import api_logger
-from utils.util import Util
+
+import requests
 from longVideo import LongVideo, ShortVideo
 import shutil
 from utils.mediaUtil import MediaUtil
-# from utilDescribeVideo import *
-import requests
+from utils.logger_settings import api_logger
+from utils.util import Util
+from splitting.splitHelp import *
 
 
 def reqVideoDesc(videoPath):
