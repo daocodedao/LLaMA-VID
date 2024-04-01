@@ -30,27 +30,24 @@ class LongVideo(BaseModel):
     def updateVideoInfo(self, videoPath, videoId=None):
         if not os.path.exists(videoPath):
             return 
-        self.videoPath = videoPath
-        self.name = Path(self.videoPath).stem
-        videoName = os.path.basename(self.videoPath)
+        # self.videoPath = videoPath
+        self.name = Path(videoPath).stem
+        videoName = os.path.basename(videoPath)
         self.completeVideoInfo()
         if videoId is None:
             timestamp = int(datetime.datetime.now().timestamp())
             self.id = str(timestamp)
         else:
             self.id = videoId
-        # self.dir = f"/data/work/longvideo/{videoId}/"
-        videoDir = os.path.dirname(self.videoPath)
+        videoDir = f"/data/work/longvideo/{videoId}/"
         self.subVideoDir = os.path.join(videoDir, 'subVideos')
         os.makedirs(self.subVideoDir, exist_ok=True)
-
         outVideoPath = os.path.join(videoDir, videoName)
         if not os.path.exists(outVideoPath):
             shutil.copyfile(self.videoPath, outVideoPath)
             self.videoPath = outVideoPath
 
     def completeVideoInfo(self):
-        # videoPath = self.getVideoPath()
         video = cv2.VideoCapture(self.videoPath)
         self.duration = video.get(cv2.CAP_PROP_POS_MSEC)
         self.width  = video.get(cv2.CAP_PROP_FRAME_WIDTH)   # float `width`
