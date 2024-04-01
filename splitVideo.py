@@ -15,7 +15,10 @@ import requests
 
 
 def reqVideoDesc(videoPath):
-    url = 'http://39.105.194.16:9690/video/describe'
+    if  Util.is_loopback('localhost'):
+        url =  'http://localhost:9690/video/describe'
+    else:
+        url = 'http://39.105.194.16:9690/video/describe'
 
     file = {'file': open(videoPath, 'rb')}
     resp = requests.post(url=url, files=file) 

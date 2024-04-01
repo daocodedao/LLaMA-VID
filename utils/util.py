@@ -3,9 +3,8 @@ import platform
 
 from utils.logger_settings import api_logger
 from urllib.parse import urlparse
-# import av
-
-# import cv2
+import socket
+import struct
 
 
 def split(todo_text):
@@ -229,3 +228,18 @@ class Util:
       saveVideoName = f"{Util.getCurTimeStampStr()}.mp4"
       videoPath = os.path.join("/tmp/", saveVideoName)
       return videoPath
+  
+  def is_loopback(host):
+    loopback_checker = {
+        socket.AF_INET: lambda x: struct.unpack('!I', socket.inet_aton(x))[0] >> (32-8) == 127,
+        socket.AF_INET6: lambda x: x == '::1'
+    }
+    for family in (socket.AF_INET, socket.AF_INET6):
+        try:
+            r = socket.getaddrinfo(host, None, family, socket.SOCK_STREAM)
+        except socket.gaierror:
+            return False
+        for family, _, _, _, sockaddr in r:
+            if not loopback_checker[family](sockaddr[0]):
+                return False
+    return True
