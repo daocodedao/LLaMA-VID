@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 import cv2
-from datetime import datetime
+from datetime import datetime, time
 from splitting.splitHelp import *
 from utils.logger_settings import api_logger
 from utils.util import Util
@@ -58,8 +58,8 @@ for i, timecode in enumerate(timecodes):
     outVideoPath = os.path.join(longVideo.subVideoDir, subVideo.name)
     subVideo.path =outVideoPath
     subVideo.duration = video_duration
-    subVideo.startTime = start_time.total_seconds()
-    subVideo.endTime = end_time.total_seconds()
+    subVideo.startTime = time.mktime(start_time.timetuple())
+    subVideo.endTime = time.mktime(end_time.timetuple())
     
     os.makedirs(os.path.dirname(outVideoPath), exist_ok=True)
     cmd = "ffmpeg -y -hide_banner -loglevel panic -ss %s -t %.3f -i %s %s"%(timecode[0], video_duration, srcVideoPath, outVideoPath)
