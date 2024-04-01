@@ -162,8 +162,9 @@ class MediaUtil:
         return noHumanParts
     
     def time_to_seconds(time_str):  
-        hours, minutes, seconds = map(int, time_str.split(":"))  
-        milliseconds = float("0." + time_str.split(".")[1])  
-        
-        total_seconds = hours * 3600 + minutes * 60 + seconds + milliseconds  
-        return total_seconds 
+        parts = time_str.split(':')
+        hours = int(parts[0])
+        minutes = int(parts[1])
+        seconds = float(parts[2])
+        total_seconds = hours * 3600 + minutes * 60 + seconds
+        return total_seconds
