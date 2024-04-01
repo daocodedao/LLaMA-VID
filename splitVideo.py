@@ -47,6 +47,6 @@ for i, timecode in enumerate(timecodes):
     api_logger.info(f"timecode: {timecode[0]}")
     api_logger.info(f"video_duration: {video_duration}")
     os.makedirs(outVideoPath, exist_ok=True)
-    cmd = "ffmpeg -hide_banner -loglevel panic -ss %s -t %.3f -i %s %s"%(timecode[0], video_duration, srcVideoPath, outVideoPath)
+    cmd = "ffmpeg -y -hide_banner -loglevel panic -ss %s -t %.3f -i %s %s"%(timecode[0], video_duration, srcVideoPath, outVideoPath)
     api_logger.info(f"cmd: {cmd}")
     os.system(cmd)
