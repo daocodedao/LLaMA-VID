@@ -57,8 +57,8 @@ for i, timecode in enumerate(timecodes):
     outVideoPath = os.path.join(longVideo.subVideoDir, subVideo.name)
     subVideo.path =outVideoPath
     subVideo.duration = video_duration
-    subVideo.startTime = start_time
-    subVideo.endTime = end_time
+    subVideo.startTime = timecode[0]
+    subVideo.endTime = timecode[1]
     
     os.makedirs(os.path.dirname(outVideoPath), exist_ok=True)
     cmd = "ffmpeg -y -hide_banner -loglevel panic -ss %s -t %.3f -i %s %s"%(timecode[0], video_duration, srcVideoPath, outVideoPath)
