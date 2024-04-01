@@ -11,7 +11,19 @@ from longVideo import LongVideo, ShortVideo
 import shutil
 from utils.mediaUtil import MediaUtil
 from utilDescribeVideo import *
+import requests
 
+
+def reqVideoDesc(videoPath):
+    url = 'http://39.105.194.16:9690/video/describe'
+
+    file = {'file': open(videoPath, 'rb')}
+    resp = requests.post(url=url, files=file) 
+    result = resp.json()
+    # api_logger.info("视频描述：")
+    # print(resp.json())
+    print(result['message'])
+    return result['message']
 
 srcVideoPath="./splitting/input_videos/video1.mp4"
 video_name = Path(srcVideoPath).stem
@@ -70,10 +82,8 @@ for i, timecode in enumerate(timecodes):
     os.system(cmd)
 
     # api_logger.info(subVideo)
-    desc = describeVideo(outVideoPath)
-    api_logger.info("视频描述：")
-    api_logger.info(desc)
-    subVideo.desc = desc
+    # desc = describeVideo(outVideoPath)
+    subVideo.desc = reqVideoDesc(outVideoPath)
 
     longVideo.shortVideos.append(subVideo)
 
