@@ -33,7 +33,7 @@ class LongVideo(BaseModel):
         # self.videoPath = videoPath
         self.name = Path(videoPath).stem
         videoName = os.path.basename(videoPath)
-        self.completeVideoInfo()
+        self.completeVideoInfo(videoPath)
         if videoId is None:
             timestamp = int(datetime.datetime.now().timestamp())
             self.id = str(timestamp)
@@ -47,8 +47,8 @@ class LongVideo(BaseModel):
             shutil.copyfile(self.videoPath, outVideoPath)
             self.videoPath = outVideoPath
 
-    def completeVideoInfo(self):
-        video = cv2.VideoCapture(self.videoPath)
+    def completeVideoInfo(self, videoPath):
+        video = cv2.VideoCapture(videoPath)
         self.duration = video.get(cv2.CAP_PROP_POS_MSEC)
         self.width  = video.get(cv2.CAP_PROP_FRAME_WIDTH)   # float `width`
         self.height = video.get(cv2.CAP_PROP_FRAME_WIDTH)  # float `height`
