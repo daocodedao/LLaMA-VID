@@ -51,7 +51,7 @@ class LongVideo(BaseModel):
         video = cv2.VideoCapture(videoPath)
         self.duration = video.get(cv2.CAP_PROP_POS_MSEC)
         self.width  = video.get(cv2.CAP_PROP_FRAME_WIDTH)   # float `width`
-        self.height = video.get(cv2.CAP_PROP_FRAME_WIDTH)  # float `height`
+        self.height = video.get(cv2.CAP_PROP_FRAME_HEIGHT)  # float `height`
         if self.width > self.height:
             self.isHorizontal = True
         else:
