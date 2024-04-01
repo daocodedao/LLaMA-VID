@@ -47,6 +47,7 @@ timecodes = video_event
 
 shutil.rmtree(longVideo.subVideoDir, ignore_errors=True)
 os.makedirs(longVideo.subVideoDir)
+longVideo.shortVideos = []
 
 for i, timecode in enumerate(timecodes): 
     subVideo = ShortVideo()
@@ -57,8 +58,8 @@ for i, timecode in enumerate(timecodes):
     outVideoPath = os.path.join(longVideo.subVideoDir, subVideo.name)
     subVideo.path =outVideoPath
     subVideo.duration = video_duration
-    subVideo.startTime = timecode[0]
-    subVideo.endTime = timecode[1]
+    subVideo.startTime = start_time.total_seconds()
+    subVideo.endTime = end_time.total_seconds()
     
     os.makedirs(os.path.dirname(outVideoPath), exist_ok=True)
     cmd = "ffmpeg -y -hide_banner -loglevel panic -ss %s -t %.3f -i %s %s"%(timecode[0], video_duration, srcVideoPath, outVideoPath)
@@ -66,6 +67,7 @@ for i, timecode in enumerate(timecodes):
     os.system(cmd)
 
     api_logger.info(subVideo)
+    longVideo.shortVideos.append(subVideo)
 
 
 api_logger.info(longVideo)
