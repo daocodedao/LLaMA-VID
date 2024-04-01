@@ -19,8 +19,6 @@ class LongVideo(BaseModel):
     id:str = None
     name:str = None
     videoPath:str = None
-    # dir:str = None
-    # fileName:str = None
     isHorizontal:bool=True
     width:int = 0
     height:int = 0
@@ -49,6 +47,14 @@ class LongVideo(BaseModel):
         outVideoPath = os.path.join(videoDir, videoName)
         if not os.path.exists(outVideoPath):
             shutil.copyfile(self.videoPath, outVideoPath)
+            self.videoPath = outVideoPath
+
+        print(f"{self.videoPath} \n \
+              duration: {self.duration}, \n\
+              width: {self.width}, \n \
+              height: {self.height}, \n \
+              isHorizontal: {self.isHorizontal}")
+
 
 
     def completeVideoInfo(self):
@@ -62,11 +68,6 @@ class LongVideo(BaseModel):
         else:
             self.isHorizontal = False
 
-        print(f"{self.videoPath} \n \
-              duration: {self.duration}, \n\
-              width: {self.width}, \n \
-              height: {self.height}, \n \
-              isHorizontal: {self.isHorizontal}")
 
 
 
