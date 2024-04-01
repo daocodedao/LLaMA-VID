@@ -7,26 +7,26 @@ from pathlib import Path
 import shutil
 
 class ShortVideo(BaseModel):
-    name:str
-    duration:float
-    startTime:float
-    endTime:float
-    desc:str
-    path:str
+    name:str = None
+    duration:float = 0
+    startTime:float = 0
+    endTime:float = 0
+    desc:str = ""
+    path:str = None
 
 
 class LongVideo(BaseModel):
-    id:str
-    name:str
-    dir:str
-    fileName:str
+    id:str = None
+    name:str = None
+    dir:str = None
+    fileName:str = None
     isHorizontal:bool=True
     width:int = 0
     height:int = 0
     duration:float = 0
-    subVideoDir:str
+    subVideoDir:str = ""
     shortVideos:list[ShortVideo] = []
-    desc:str
+    desc:str = ""
 
     def updateVideoInfo(self, videoPath, videoId=None):
         if not os.path.exists(videoPath):
