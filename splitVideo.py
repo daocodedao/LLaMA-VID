@@ -19,7 +19,7 @@ cutscenes_raw = cutscene_detection(srcVideoPath, cutscene_threshold=25, max_cuts
         
 longVideo = LongVideo()
 longVideo.updateVideoInfo(videoId=videoId, videoPath=srcVideoPath)
-
+api_logger.info(f"long video info: {longVideo}")
 
 device = "cuda"
 api_logger.info("loading model")

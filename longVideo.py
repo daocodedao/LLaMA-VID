@@ -49,14 +49,6 @@ class LongVideo(BaseModel):
             shutil.copyfile(self.videoPath, outVideoPath)
             self.videoPath = outVideoPath
 
-        print(f"{self.videoPath} \n \
-              duration: {self.duration}, \n\
-              width: {self.width}, \n \
-              height: {self.height}, \n \
-              isHorizontal: {self.isHorizontal}")
-
-
-
     def completeVideoInfo(self):
         # videoPath = self.getVideoPath()
         video = cv2.VideoCapture(self.videoPath)
