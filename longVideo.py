@@ -28,13 +28,13 @@ class LongVideo(BaseModel):
     shortVideos:list[ShortVideo] = []
     desc:str
 
-    def __init__(self, videoPath, videoId=None):
+    def updateVideoInfo(self, videoPath, videoId=None):
         if not os.path.exists(videoPath):
             return 
 
         self.name = Path(videoPath).stem
         videoName = os.path.basename(videoPath)
-        self.updateVideoInfo()
+        self.completeVideoInfo()
         if videoId is None:
             timestamp = int(datetime.datetime.now().timestamp())
             self.id = str(timestamp)
@@ -52,7 +52,7 @@ class LongVideo(BaseModel):
         return os.path.join(self.dir, self.fileName)
 
 
-    def updateVideoInfo(self):
+    def completeVideoInfo(self):
         videoPath = self.getVideoPath()
         video = cv2.VideoCapture(videoPath)
         self.duration = video.get(cv2.CAP_PROP_POS_MSEC)

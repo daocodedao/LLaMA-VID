@@ -17,7 +17,8 @@ videoId = Util.getCurTimeStampStr()
 # output_folder = f"/data/movie/{videoId}"
 cutscenes_raw = cutscene_detection(srcVideoPath, cutscene_threshold=25, max_cutscene_len=5)
         
-longVideo = LongVideo(videoId=videoId, videoPath=srcVideoPath)
+longVideo = LongVideo()
+longVideo.updateVideoInfo(videoId=videoId, videoPath=srcVideoPath)
 
 
 device = "cuda"
