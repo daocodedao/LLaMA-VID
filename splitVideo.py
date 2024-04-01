@@ -10,6 +10,8 @@ from utils.util import Util
 from longVideo import LongVideo, ShortVideo
 import shutil
 from utils.mediaUtil import MediaUtil
+from utilDescribeVideo import *
+
 
 srcVideoPath="./splitting/input_videos/video1.mp4"
 video_name = Path(srcVideoPath).stem
@@ -67,7 +69,12 @@ for i, timecode in enumerate(timecodes):
     api_logger.info(f"cmd: {cmd}")
     os.system(cmd)
 
-    api_logger.info(subVideo)
+    # api_logger.info(subVideo)
+    desc = describeVideo(outVideoPath)
+    api_logger.info("视频描述：")
+    api_logger.info(desc)
+    subVideo.desc = desc
+
     longVideo.shortVideos.append(subVideo)
 
 
