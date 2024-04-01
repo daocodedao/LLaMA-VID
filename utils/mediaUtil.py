@@ -160,3 +160,10 @@ class MediaUtil:
                 if timeDiff > cutThreshold:
                     noHumanParts.append((sub.end.total_seconds(), nextSub.start.total_seconds()))
         return noHumanParts
+    
+    def time_to_seconds(time_str):  
+        hours, minutes, seconds = map(int, time_str.split(":"))  
+        milliseconds = float("0." + time_str.split(".")[1])  
+        
+        total_seconds = hours * 3600 + minutes * 60 + seconds + milliseconds  
+        return total_seconds 

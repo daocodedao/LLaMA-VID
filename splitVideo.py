@@ -9,7 +9,7 @@ from utils.logger_settings import api_logger
 from utils.util import Util
 from longVideo import LongVideo, ShortVideo
 import shutil
-
+from utils.mediaUtil import MediaUtil
 
 srcVideoPath="./splitting/input_videos/video1.mp4"
 video_name = Path(srcVideoPath).stem
@@ -58,8 +58,8 @@ for i, timecode in enumerate(timecodes):
     outVideoPath = os.path.join(longVideo.subVideoDir, subVideo.name)
     subVideo.path =outVideoPath
     subVideo.duration = video_duration
-    subVideo.startTime = float(start_time.strftime("%s"))
-    subVideo.endTime = float(end_time.strftime("%s"))
+    subVideo.startTime = MediaUtil.time_to_seconds(timecode[0])
+    subVideo.endTime = MediaUtil.time_to_seconds(timecode[1])
     
     os.makedirs(os.path.dirname(outVideoPath), exist_ok=True)
     cmd = "ffmpeg -y -hide_banner -loglevel panic -ss %s -t %.3f -i %s %s"%(timecode[0], video_duration, srcVideoPath, outVideoPath)
