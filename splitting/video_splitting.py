@@ -26,4 +26,5 @@ if __name__ == "__main__":
             start_time = datetime.strptime(timecode[0], '%H:%M:%S.%f')
             end_time = datetime.strptime(timecode[1], '%H:%M:%S.%f')
             video_duration = (end_time - start_time).total_seconds()
-            os.system("ffmpeg -hide_banner -loglevel panic -ss %s -t %.3f -i %s %s"%(timecode[0], video_duration, video_path, os.path.join(args.output_folder, video_name+".%i.mp4"%i)))
+            videoPath = os.path.join(args.output_folder, video_name+".%i.mp4"%i)
+            os.system("ffmpeg -hide_banner -loglevel panic -ss %s -t %.3f -i %s %s"%(timecode[0], video_duration, video_path, videoPath))
