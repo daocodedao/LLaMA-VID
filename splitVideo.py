@@ -34,7 +34,7 @@ longVideo = LongVideo()
 longVideo.updateVideoInfo(videoId=videoId, videoPath=srcVideoPath)
 api_logger.info(f"long video info: {longVideo}")
 
-device = "cuda"
+device = "cuda:0"
 api_logger.info("loading model")
 model = imagebind_model.imagebind_huge(pretrained=True)
 model.eval()
