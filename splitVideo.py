@@ -10,7 +10,7 @@ from utils.util import Util
 from longVideo import LongVideo, ShortVideo
 import shutil
 from utils.mediaUtil import MediaUtil
-from utilDescribeVideo import *
+# from utilDescribeVideo import *
 import requests
 
 
