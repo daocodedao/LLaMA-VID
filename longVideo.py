@@ -18,8 +18,9 @@ class ShortVideo(BaseModel):
 class LongVideo(BaseModel):
     id:str = None
     name:str = None
-    dir:str = None
-    fileName:str = None
+    videoPath:str = None
+    # dir:str = None
+    # fileName:str = None
     isHorizontal:bool=True
     width:int = 0
     height:int = 0
@@ -31,30 +32,28 @@ class LongVideo(BaseModel):
     def updateVideoInfo(self, videoPath, videoId=None):
         if not os.path.exists(videoPath):
             return 
-
-        self.name = Path(videoPath).stem
-        videoName = os.path.basename(videoPath)
+        self.videoPath = videoPath
+        self.name = Path(self.videoPath).stem
+        videoName = os.path.basename(self.videoPath)
         self.completeVideoInfo()
         if videoId is None:
             timestamp = int(datetime.datetime.now().timestamp())
             self.id = str(timestamp)
         else:
             self.id = videoId
-        self.dir = f"/data/work/longvideo/{videoId}/"
-        self.subVideoDir = os.path.join(self.dir, 'subVideos')
+        # self.dir = f"/data/work/longvideo/{videoId}/"
+        videoDir = os.path.dirname(self.videoPath)
+        self.subVideoDir = os.path.join(videoDir, 'subVideos')
         os.makedirs(self.subVideoDir, exist_ok=True)
 
-        outVideoPath = os.path.join(self.dir, videoName)
+        outVideoPath = os.path.join(videoDir, videoName)
         if not os.path.exists(outVideoPath):
-            shutil.copyfile(videoPath, outVideoPath)
-
-    def getVideoPath(self):
-        return os.path.join(self.dir, self.fileName)
+            shutil.copyfile(self.videoPath, outVideoPath)
 
 
     def completeVideoInfo(self):
-        videoPath = self.getVideoPath()
-        video = cv2.VideoCapture(videoPath)
+        # videoPath = self.getVideoPath()
+        video = cv2.VideoCapture(self.videoPath)
         self.duration = video.get(cv2.CAP_PROP_POS_MSEC)
         self.width  = video.get(cv2.CAP_PROP_FRAME_WIDTH)   # float `width`
         self.height = video.get(cv2.CAP_PROP_FRAME_WIDTH)  # float `height`
@@ -63,7 +62,11 @@ class LongVideo(BaseModel):
         else:
             self.isHorizontal = False
 
-        print(f"{self.name} duration: {self.duration}, width: {self.width}, height: {self.height}, isHorizontal: {self.isHorizontal}")
+        print(f"{self.videoPath} \n \
+              duration: {self.duration}, \n\
+              width: {self.width}, \n \
+              height: {self.height}, \n \
+              isHorizontal: {self.isHorizontal}")
 
 
 
