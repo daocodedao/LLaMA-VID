@@ -83,9 +83,17 @@ for i, timecode in enumerate(timecodes):
 
     # api_logger.info(subVideo)
     # desc = describeVideo(outVideoPath)
-    subVideo.desc = reqVideoDesc(outVideoPath)
+    # subVideo.desc = reqVideoDesc(outVideoPath)
 
     longVideo.shortVideos.append(subVideo)
 
-
+api_logger.info("视频分解完毕")
 api_logger.info(longVideo)
+
+
+api_logger.info("开始视频理解")
+for subVideo in longVideo.shortVideos:
+    subVideoPath = subVideo.path
+    api_logger.info(f"请求视频理解：{outVideoPath}")
+    desc = describeVideo(outVideoPath)
+    subVideo.desc = desc
