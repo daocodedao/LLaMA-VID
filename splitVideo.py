@@ -95,5 +95,5 @@ api_logger.info("开始视频理解")
 for subVideo in longVideo.shortVideos:
     subVideoPath = subVideo.path
     api_logger.info(f"请求视频理解：{outVideoPath}")
-    desc = describeVideo(outVideoPath)
+    desc = reqVideoDesc(outVideoPath)
     subVideo.desc = desc
