@@ -58,6 +58,7 @@ for i, timecode in enumerate(timecodes):
     outVideoPath = os.path.join(longVideo.subVideoDir, subVideo.name)
     subVideo.path =outVideoPath
     subVideo.duration = video_duration
+    print(f"startTime = {timecode[0]} endTime = {timecode[1]}")
     subVideo.startTime = MediaUtil.time_to_seconds(timecode[0])
     subVideo.endTime = MediaUtil.time_to_seconds(timecode[1])
     
