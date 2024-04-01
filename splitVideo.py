@@ -54,7 +54,7 @@ for i, timecode in enumerate(timecodes):
     end_time = datetime.strptime(timecode[1], '%H:%M:%S.%f')
     video_duration = (end_time - start_time).total_seconds()
     subVideo.name = f"{video_name}.{i}.mp4"
-    outVideoPath = os.path.join(longVideo.subVideoDir, subVideo)
+    outVideoPath = os.path.join(longVideo.subVideoDir, subVideo.name)
     subVideo.path =outVideoPath
     subVideo.duration = video_duration
     subVideo.startTime = start_time
