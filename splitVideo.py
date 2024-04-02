@@ -2,7 +2,6 @@ import cv2
 import os
 from pathlib import Path
 from datetime import datetime, time
-
 import requests
 from longVideo import LongVideo, ShortVideo
 import shutil
@@ -85,7 +84,7 @@ cutscenes_raw = cutscene_detection(srcVideoPath, cutscene_threshold=25, max_cuts
         
 longVideo = LongVideo()
 longVideo.updateVideoInfo(videoId=videoId, videoPath=srcVideoPath)
-api_logger.info(f"long video info: {longVideo}")
+# api_logger.info(longVideo)
 
 startSplitVideo(longVideo)
 
